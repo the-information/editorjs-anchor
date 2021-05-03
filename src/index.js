@@ -56,8 +56,11 @@ class AnchorBlockTune {
         wrapperInput.value = this.getAnchor();
 
         wrapperInput.addEventListener('input', (event) => {
-            // Allow only the following characters
-            let value = event.target.value.replace(/[^a-z0-9_-]/gi, '');
+            // Append "https://" to anything that doesn't start with "http"
+            let value = event.target.value
+            if (value.indexOf('http') !== 0) {
+                value = `https://${value}`;
+            }
 
             // Save value
             if (value.length > 0) {
